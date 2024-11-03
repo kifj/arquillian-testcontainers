@@ -65,5 +65,6 @@ public @interface Testcontainer {
      *
      * @return the type to construct
      */
+    @SuppressWarnings("rawtypes")
     Class<? extends GenericContainer> type() default GenericContainer.class;
 }

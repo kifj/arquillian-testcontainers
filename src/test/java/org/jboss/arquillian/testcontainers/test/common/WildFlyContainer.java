@@ -16,7 +16,11 @@ import org.testcontainers.utility.DockerImageName;
  */
 public class WildFlyContainer extends GenericContainer<WildFlyContainer> {
     public WildFlyContainer() {
-        super(DockerImageName.parse("quay.io/wildfly/wildfly:32.0.1.Final-jdk11"));
+        super(DockerImageName.parse("quay.io/wildfly/wildfly:34.0.0.Final-jdk21"));
+    }
+
+    protected WildFlyContainer(DockerImageName dockerImageName) {
+        super(dockerImageName);
     }
 
     @SuppressWarnings("resource")
