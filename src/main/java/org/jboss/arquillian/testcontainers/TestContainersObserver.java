@@ -17,7 +17,7 @@ import org.jboss.arquillian.test.spi.annotation.ClassScoped;
 import org.jboss.arquillian.test.spi.event.enrichment.AfterEnrichment;
 import org.jboss.arquillian.test.spi.event.suite.AfterClass;
 import org.jboss.arquillian.test.spi.event.suite.BeforeClass;
-import org.jboss.arquillian.testcontainers.api.DockerRequired;
+import org.jboss.arquillian.testcontainers.api.TestcontainersRequired;
 import org.testcontainers.DockerClientFactory;
 
 @SuppressWarnings("unused")
@@ -30,7 +30,7 @@ class TestContainersObserver {
     private Instance<ContainerRegistry> registry;
 
     /**
-     * This first checks if the {@link DockerRequired} annotation is present on the test class failing if necessary. It
+     * This first checks if the {@link TestcontainersRequired} annotation is present on the test class failing if necessary. It
      * then creates the {@link TestcontainerRegistry} and stores it in a {@link ClassScoped} instance.
      *
      * @param beforeClass the before class event
@@ -39,10 +39,18 @@ class TestContainersObserver {
      */
     public void createContainer(@Observes(precedence = 500) BeforeClass beforeClass) throws Throwable {
         final TestClass javaClass = beforeClass.getTestClass();
-        final DockerRequired dockerRequired = javaClass.getAnnotation(DockerRequired.class);
+        final TestcontainersRequired dockerRequired = javaClass.getAnnotation(TestcontainersRequired.class);
         if (dockerRequired != null) {
             if (!isDockerAvailable()) {
-                throw createException(dockerRequired.value());
+                var throwable = dockerRequired.value();
+                final var overrideClass = System.getProperty("org.arquillian.testcontainers.docker.required.exception");
+                if (overrideClass != null && !overrideClass.isBlank()) {
+                    Class<?> override = Class.forName(overrideClass);
+                    if (Throwable.class.isAssignableFrom(override)) {
+                        throwable = (Class<? extends Throwable>) override;
+                    }
+                }
+                throw createException(throwable);
             }
         }
         final TestcontainerRegistry instances = new TestcontainerRegistry();

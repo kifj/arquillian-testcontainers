@@ -4,15 +4,14 @@
   ~ SPDX-License-Identifier: Apache-2.0
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <!-- Parent -->
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>46</version>
-        <relativePath/>
+        <version>49</version>
+        <relativePath />
     </parent>
 
     <!-- Model Version -->
@@ -21,7 +20,7 @@
     <!-- Artifact Configuration -->
     <groupId>org.jboss.arquillian</groupId>
     <artifactId>arquillian-testcontainers</artifactId>
-    <version>1.0.0.Alpha2-SNAPSHOT</version>
+    <version>1.0.0.Alpha5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Arquillian Testcontainers Support</name>
@@ -74,12 +73,12 @@
         <jdk.min.version>17</jdk.min.version>
 
         <!-- Dependency versions -->
-        <version.org.jboss.arquillian.core>1.9.1.Final</version.org.jboss.arquillian.core>
-        <version.testcontainers>1.20.3</version.testcontainers>
-        <version.org.junit>5.11.3</version.org.junit>
+        <version.org.jboss.arquillian.core>1.10.0.Final</version.org.jboss.arquillian.core>
+        <version.testcontainers>1.21.2</version.testcontainers>
+        <version.org.junit>5.13.2</version.org.junit>
 
         <!-- Plugin versions -->
-        <version.formatter.maven.plugin>2.24.1</version.formatter.maven.plugin>
+        <version.formatter.maven.plugin>2.27.0</version.formatter.maven.plugin>
         <version.impsort.maven.plugin>1.12.0</version.impsort.maven.plugin>
 
         <!-- Configuration properties -->
